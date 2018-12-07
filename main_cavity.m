@@ -133,9 +133,23 @@ BGoverBR= BMin/BLin;
 B1 = mean(B(ix1B-1:ix1B,1:3));
 B2 = mean(B(ix2B:ix2B+1,1:3));
 Bshear = acosd(dot(B1,B2)/(norm(B1)*norm(B2)));
-fprintf('vAi  v_in  vL_in  Ni_in  B_in  BL_in  BG/BR  B-shear  beta\n');
-fprintf('%4.1f %4.1f %5.1f %5.1f %5.1f %6.1f %6.1f %8.1f %5.1f\n', vAi, viin, viLin, Niin, Bin, BLin, BGoverBR, Bshear, beta)
+di = 0;
+de = 0;
+vgsein = 0;
+exhwidth = 0;
+%% WRITE TO FILE
+outputs = strcat(yyyymmddHHMM,',',starttime,',',endtime,',',cavitystart,',',cavityend,',',...
+    num2str(Bin),',',num2str(Niin),',',num2str(Tiin),',',num2str(Tein),',',num2str(beta),',',num2str(betacrit),',',...
+    num2str(BGoverBR),',',num2str(Bshear),',',num2str(L),',',num2str(M),',',num2str(N),',',num2str(vAi),',',num2str(vijet),',',num2str(vgsein),',',...
+    num2str(dTiexh),',',num2str(dTiexhpar),',',num2str(dTiexhperp),',',num2str(dTiexhTheory),',',num2str(dTiparTheory),',',num2str(dTicav),',',num2str(dTicavpar),',',...
+    num2str(dTicavperp),',',num2str(dTeexh),',',num2str(dTeexhpar),',',num2str(dTeexhperp),',',num2str(dTeexhTheory),',',num2str(dTecav),',',num2str(dTecavpar),',',...
+    num2str(dTecavperp),',',num2str(di),',',num2str(de),',',num2str(exhwidth),',','\n');
 
+fid = fopen('Results.csv','a+');
+fprintf(fid,outputs);
+fclose(fid);
+% fprintf('vAi  v_in  vL_in  Ni_in  B_in  BL_in  BG/BR  B-shear  beta\n');
+% fprintf('%4.1f %4.1f %5.1f %5.1f %5.1f %6.1f %6.1f %8.1f %5.1f\n', vAi, viin, viLin, Niin, Bin, BLin, BGoverBR, Bshear, beta)
 %% Plotting 1
 make_it_tight = true;
 subplot = @(m,n,p) subtightplot (m, n, p, [0.01 0.05], [0.1 0.04], [0.1 0.01]);
@@ -204,5 +218,5 @@ legend('JL FPI');
 ylabel({'J';'[nA/$m^2$]'},'Rotation',0);
 samexaxis();
 
-%saveas(gcf,[yyyymmddHHMM '.png'])
-%saveas(gcf,[yyyymmddHHMM '.fig'])
+saveas(gcf,[yyyymmddHHMM '.png'])
+saveas(gcf,[yyyymmddHHMM '.fig'])
