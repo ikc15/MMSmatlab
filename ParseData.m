@@ -3,13 +3,13 @@ function ParseData(fgm,edp,fpie,fpii)
 global tfgm tedp tfpie tfpii tstate r B E ve vi Ne Ni Ti Te;
 
 % convert epoch time (matlab autoconvert to datenum) to datetime:
-tfgm = datetime(fgm{1,1},'ConvertFrom','datenum','Format','dd-MMM-yyyy HH:mm:ss.SSS');
-tedp = datetime(edp{1,1},'ConvertFrom','datenum','Format','dd-MMM-yyyy HH:mm:ss.SSS');
-tfpie = datetime(fpie{1,1},'ConvertFrom','datenum','Format','dd-MMM-yyyy HH:mm:ss.SSS');
-tfpii = datetime(fpii{1,1},'ConvertFrom','datenum','Format','dd-MMM-yyyy HH:mm:ss.SSS');
-
+ tfgm = datetime(fgm{1,1},'ConvertFrom','datenum','TicksPerSecond',1000,'Format','dd-MMM-yyyy HH:mm:ss.SSS');
+ tedp = datetime(edp{1,1},'ConvertFrom','datenum','TicksPerSecond',1000,'Format','dd-MMM-yyyy HH:mm:ss.SSS');
+ tfpie = datetime(fpie{1,1},'ConvertFrom','datenum','TicksPerSecond',1000,'Format','dd-MMM-yyyy HH:mm:ss.SSS');
+ tfpii = datetime(fpii{1,1},'ConvertFrom','datenum','TicksPerSecond',1000,'Format','dd-MMM-yyyy HH:mm:ss.SSS');
+% 
 % convert epoch time for the state of the spacecraft to datetime:
-tstate = datetime(fgm{1,7},'ConvertFrom','datenum','TicksPerSecond',1000,'Format','dd-MMM-yyyy HH:mm:ss.SSS');
+ tstate = datetime(fgm{1,7},'ConvertFrom','datenum','TicksPerSecond',1000,'Format','dd-MMM-yyyy HH:mm:ss.SSS');
 
 % Spacecraft Position 
 r(:,1:4) = fgm{1,8}; %x, y, z, r (GSE- in m)
